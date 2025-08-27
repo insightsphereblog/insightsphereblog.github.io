@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InsightSphere - Share Your Ideas</title>
+    <meta
+      name="description"
+      content="InsightSphere is a platform for sharing insightful ideas and stories on technology, productivity, and sustainable living."
+    />
+    <meta
+      name="keywords"
+      content="blog, technology, productivity, storytelling, sustainable living, InsightSphere"
+    />
+    <meta name="author" content="InsightSphere Team" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="InsightSphere - Share Your Ideas" />
+    <meta
+      property="og:description"
+      content="Discover insightful articles on technology, productivity, and sustainable living at InsightSphere."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="font-sans text-gray-900 bg-gray-50">
+    <header class="bg-white border-b border-gray-200 py-4 sticky top-0 z-10">
+      <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center"
+      >
+        <h1 class="text-2xl sm:text-3xl font-bold">InsightSphere</h1>
+        <nav class="flex space-x-4 sm:space-x-6">
+          <a
+            href="/index.html"
+            class="text-gray-600 hover:text-gray-900 text-sm sm:text-base"
+            >Home</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <section class="py-8 sm:py-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          id="featured-post"
+          class="flex flex-col md:flex-row bg-white rounded-lg shadow-md overflow-hidden"
+        >
+          <!-- Featured post content will be injected here -->
+        </div>
+      </div>
+    </section>
+
+    <section class="py-8 sm:py-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">Recent Posts</h2>
+        <div id="recent-posts" class="space-y-6 sm:space-y-8">
+          <!-- Recent posts will be injected here -->
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-gray-100 py-6">
+      <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 text-sm"
+      >
+        <p>&copy; 2025 InsightSphere. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // JavaScript controller for dynamic content
+      const blogController = {
+        posts: [
+          {
+            title: "Schauspielschule für Performing Arts in der Schweiz",
+            description:
+              "Explore the emerging technologies shaping our world, from AI advancements to sustainable energy solutions.",
+            image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihgYpzkDw8Gm2GHplY5UKtwsQbpYYWuBw3dNPZ71ZHRA6CudAJrsvsl_MoGYVoP5EHSmam1cKeyV0gln-g3D7gGP6TgVd0TgliAOUJao5Eyc-Zr9pVMOWpIb7BG_NnkjjiZGY4dnUHFBRL9EchiT-SBMxBcTJxB8E5kv4RPQPsqSXyfWgPXUKtKB-uMAVN/w640-h360/Stageacademy%20acting%20school.png",
+            date: "Aug 27, 2025",
+            readTime: "5 min read",
+            isFeatured: true,
+            link: "schauspielschule-performing-arts-schweiz.html",
+          },
+        ],
+
+        renderFeaturedPost() {
+          const featuredPost = this.posts.find((post) => post.isFeatured);
+          if (!featuredPost) return;
+
+          const featuredContainer = document.getElementById("featured-post");
+          featuredContainer.innerHTML = `
+          <img src="${featuredPost.image}" alt="${featuredPost.title}" class="w-full md:w-1/2 h-48 sm:h-64 md:h-80 object-cover">
+          <div class="p-4 sm:p-6 md:w-1/2">
+            <h2 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-4">
+              <a href="${featuredPost.link}" class="hover:text-blue-600">${featuredPost.title}</a>
+            </h2>
+            <p class="text-gray-600 mb-4 text-sm sm:text-base">${featuredPost.description}</p>
+            <p class="text-gray-500 text-xs sm:text-sm">${featuredPost.date} · ${featuredPost.readTime}</p>
+          </div>
+        `;
+        },
+
+        renderRecentPosts() {
+          const recentPosts = this.posts.filter((post) => !post.isFeatured);
+          const recentContainer = document.getElementById("recent-posts");
+          recentContainer.innerHTML = recentPosts
+            .map(
+              (post) => `
+          <div class="border-b border-gray-200 pb-6">
+            <h3 class="text-lg sm:text-xl font-semibold mb-2">
+              <a href="${post.link}" class="hover:text-blue-600">${post.title}</a>
+            </h3>
+            <p class="text-gray-600 mb-4 text-sm sm:text-base">${post.description}</p>
+            <p class="text-gray-500 text-xs">${post.date} · ${post.readTime}</p>
+          </div>
+        `
+            )
+            .join("");
+        },
+
+        init() {
+          this.renderFeaturedPost();
+          this.renderRecentPosts();
+          document.querySelectorAll("nav a").forEach((link) => {
+            link.addEventListener("click", (e) => {
+              e.preventDefault();
+              alert("This link is for demonstration purposes.");
+            });
+          });
+        },
+      };
+
+      // Initialize the controller
+      blogController.init();
+    </script>
+  </body>
+</html>
